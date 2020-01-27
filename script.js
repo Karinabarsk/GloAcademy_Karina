@@ -15,11 +15,7 @@ console.log('Период равен:', period, 'месяцев' );
 console.log ('Цель заработать', mission, 'euro');
 
 console.log(addExpenses.toLowerCase());
-console.log(addExpenses.split());
-
-/*money = prompt('Ваш месячный доход?', '5000');
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-deposit = confirm('Есть ли у вас депозит в банке?');*/
+console.log(addExpenses.split(', '));
 
 let expenses1 = prompt('Введите обязательную статью расходов?', 'бензин'),
     amount1 = +prompt('Во сколько это обойдется?', '250'),
