@@ -18,11 +18,15 @@ switch (lang) {
     break;
     }
 
-let day = {
-        'ru':['пн', 'вт', 'ср','чт', 'пт', 'сб', 'вс'],
-        'en':['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'],
-    };
-    console.log (day[lang]);
+let day = [
+    ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'], 
+    ['mn', 'ts', 'wd', 'th', 'fr', 'st', 'sn'] 
+];
+      if (lang == 'ru') {
+          console.log(day[0]); 
+      } else if (lang == 'en') {
+          console.log(day[1]);
+      } 
 
     let name = prompt('Введите имя', 'Максим');
 
