@@ -30,8 +30,7 @@ let getExpensesMonth = function() {
   }  
     return amount;
 
-}
-getExpensesMonth();
+};
 
 let getAccumulatedMonth = function(){
   let accumulated = (money - getExpensesMonth());
