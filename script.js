@@ -1,4 +1,4 @@
-'use strickt';
+'use strict';
 
 
 let hello = function (quest) {
@@ -18,7 +18,7 @@ let hello = function (quest) {
     quest = quest.slice(0, 30) + '...';
     
     return quest;
-}
+};
 
 console.log(hello());
 
