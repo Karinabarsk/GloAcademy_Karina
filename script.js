@@ -45,7 +45,7 @@ let getExpensesMonth = function() {
       do {
         count = prompt('Во сколько это обойдется?');
       } while (!isNumber(count));
-      amount = +count;
+      amount += +count;
   }
     return amount;
     
