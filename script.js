@@ -1,6 +1,12 @@
 'use strict';
 
+let randomNum;
+
 let ask = function() {
+
+  let start = function(){
+    randomNum = Math.round((Math.random() * (100 - 1) + 1));
+  };
 
   let a = +prompt('Угадай число от 1 до 100');
   if( a > 100) {
@@ -22,10 +28,13 @@ else if ( a == false){
   alert('Игра закончена');
 }
 
-else {
-  alert("Правильно!");
 
+else if (a == randomNum) {
+  alert("Правильно!");
+} else if (a !== randomNum){
+  return ask();
 }
+
 };
 
 ask();
