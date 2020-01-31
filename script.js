@@ -1,41 +1,36 @@
 'use strict';
 
-let randomNum;
+function isNum(number) {
+  return (!isNaN(parseFloat(number)) && isFinite(number));
+}
 
-let ask = function() {
+const game = function(){
+  const randomNum = Math.floor((Math.random() * 100) + 1);
 
-  let start = function(){
-    randomNum = Math.round((Math.random() * (100 - 1) + 1));
-  };
+  return function repeat(){
 
-  let a = +prompt('Угадай число от 1 до 100');
-  if( a > 100) {
+  let num = prompt('Угадай число от 1 до 100');
+
+  if (isNum(num)){
+    num = +num;
+  if (num > randomNum){
     alert('Загаданное число меньше');
-    return ask();
-}
+    repeat();
+  }  else if (num < randomNum) {
+    alert ('Загаданное число больше');
+    repeat();
+  } else {
+    alert ('Победа!');
+  } 
+  }
+  else if (num === null){
+    alert('До свидания!');
+  } else {
+    alert('Введите число');
+    repeat();
+  }
+};  
+}; 
 
-    else if( a < 0){
-    alert('Загаданное число больше');
-    return ask();
-}
-
-  else if (isNaN(a)){
-  alert('Введи число!');
-  return ask();
-}
-
-else if ( a == false){
-  alert('Игра закончена');
-}
-
-
-else if (a == randomNum) {
-  alert("Правильно!");
-} else if (a !== randomNum){
-  return ask();
-}
-
-};
-
-ask();
-
+const startGame = game();
+startGame();
