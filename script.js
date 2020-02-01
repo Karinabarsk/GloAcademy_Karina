@@ -1,45 +1,68 @@
 'use strict';
 
+function isNum(number) {
+  return (!isNaN(parseFloat(number)) && isFinite(number));
+}
 
-let ask = function() {
+
+const game = function(){
+  const randomNum = Math.floor((Math.random() * 100) + 1);
+
+  let quanity = 10;
+
+  return function repeat(){
+    
+  let num = prompt('Угадай число от 1 до 100');
   
+  quanity = (quanity - 1);
 
-  let a = +prompt('Угадай число от 1 до 100');
-  let attempts = 9;
-
-  if ( a > 100) {
-    alert('Загаданное число меньше, осталось попыток' + ' ' + attempts);
-    return ask();
-}
-
-attempts--;
-
-    if( a < 1){
-    alert('Загаданное число больше, осталось попыток'  + ' ' + attempts);
-    return ask();
-}
-
-attempts--;
-
-  if (isNaN(a)){
-  alert('Введи число!');
-  return ask();
-}
-
-if ( a == false){
-  alert('Игра закончена');
-  return;
-}
-
-let i = confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?");
-
-if (i == true) {
-    return ask();
-  } else {
-    alert('Игра закончена');
-    return;
+  let doYouWant;
+  if (quanity === 0 ){
+   console.log(quanity);
+    doYouWant = confirm('У вас нет попыток, игра окончена, хотите сыграть ещё');
+  } if ( doYouWant === true){
+   quanity = 10;
+   startGame();
+  } else if ( doYouWant === false) {
+   alert('Пока');
   }
-};
 
-ask();
+  if (isNum(num)){
+    num = +num;
 
+  if (num > randomNum){
+    alert('Загаданное число меньше');
+    alert('Осталось попыток' + ' ' + quanity);
+    repeat();
+  } 
+  else if (num < randomNum) {
+    alert ('Загаданное число больше');
+    alert('Осталось попыток' + ' ' + quanity);
+    repeat();
+  } else {
+    alert ('Победа!');
+  }
+  }
+  else if (num === null){
+    alert('До свидания!');
+  } else {
+    alert('Введите число');
+    repeat();
+  }
+  let what;
+
+   if (randomNum == num ) {
+      what = confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?");
+   }
+   if (what === true ){
+    quanity = 10;
+    startGame();
+      
+   } else if ( what === false) {
+     alert('Пока');
+  }
+};  
+}; 
+
+const startGame = game();
+startGame();
