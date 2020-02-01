@@ -21,8 +21,7 @@ const game = function(){
    console.log(quanity);
     doYouWant = confirm('У вас нет попыток, игра окончена, хотите сыграть ещё');
   } if ( doYouWant === true){
-   quanity = 10;
-   startGame();
+   game()();
   } else if ( doYouWant === false) {
    alert('Пока');
   }
@@ -55,8 +54,7 @@ const game = function(){
       what = confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?");
    }
    if (what === true ){
-    quanity = 10;
-    startGame();
+    game()();
       
    } else if ( what === false) {
      alert('Пока');
