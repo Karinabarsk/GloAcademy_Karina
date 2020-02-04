@@ -29,7 +29,7 @@ let startMoney = document.getElementById('start'),
     periodSelect = document.querySelector('.period-select');
 
 
-    let isNumber = function(n){
+let isNumber = function(n){
         return !isNaN(parseFloat(n)) && isFinite(n);
       };
       
@@ -179,7 +179,8 @@ let startMoney = document.getElementById('start'),
           for (let item of arr) {
               let modifiedItem = item.replace(/\s/g, '');
       
-              itemsList = itemsList + ((n === 1) ? '' : ', ') + (modifiedItem.charAt(0).toUpperCase() + modifiedItem.substr(1));
+              itemsList = itemsList + ((n === 1) ? '' : ', ') + (modifiedItem.charAt(0).toUpperCase() + 
+              modifiedItem.substr(1));
               n++;
           }
       }
