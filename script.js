@@ -6,6 +6,7 @@ let minutes = new Date();
 let seconds = new Date();
 let ld = new Date();
 let lt = new Date();
+let hi = new Date();
 
 let weekday=new Array(7);
 weekday[0]="Воскресенье";
@@ -32,7 +33,19 @@ month[11]="Декабря";
 
 document.write("Сегодня " + weekday[day.getDay()] + ' ' + day.getDate() + ' ' + month[day.getMonth()] + ' ' + day.getFullYear() + ' ' + 'года' + ', ' + hour.getHours() +  ' часов' + ' ' + minutes.getMinutes() + ' минут ' + seconds.getSeconds() + ' секунд');
 
-document.write(`<p>${ld.toLocaleDateString() + ' - ' + lt.toLocaleTimeString()}</p>`);
+let i = document.write(`<p>${ld.toLocaleDateString() + ' - ' + lt.toLocaleTimeString()}</p>`);
 
-let timerId = setInterval(() => alert(ld.toLocaleDateString() + ' - ' + lt.toLocaleTimeString()), 1000);
+//let newAttempt = document.write(lt.toLocaleTimeString());
 
+
+let parent = document.getElementById('parent');
+let newElement = document.createElement('p');
+
+    document.body.append(newElement);
+
+  function addElement() {
+    let hi = new Date();
+    newElement.textContent = (ld.toLocaleDateString() + ' - ' + hi.toLocaleTimeString());
+    parent.appendChild(newElement);
+  }
+  setInterval (addElement, 1000);
