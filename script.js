@@ -69,6 +69,8 @@ let isNumber = function(n){
             appData.showResult();
           },
 
+         
+
           showResult: function(){
             budgetMonthValue.value = appData.budgetMonth;
             budgetDayValue.value = Math.ceil(appData.budgetDay);
@@ -166,6 +168,7 @@ let isNumber = function(n){
          },
          
          rangePeriod: function () {
+        
           periodAmount.textContent = periodSelect.value;
       }, 
       
@@ -205,9 +208,10 @@ let isNumber = function(n){
       incomePlus.addEventListener ('click', appData.addIncomeBlock);
       periodSelect.addEventListener('input', function() {
       appData.rangePeriod();
+      incomePeriodValue.value = appData.calcSavedMoney();
 });
 cancel.addEventListener('click', appData.reset); 
-     
+
      /* console.log('Цель будет достигнута за:', appData.getTargetMonth() , 'месяцев');
       
       appData.getInfoDeposit();
