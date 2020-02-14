@@ -69,7 +69,7 @@ let isNumber = function(n){
                }
       
       blocked() {
-              document.querySelectorAll('.data input[type=text]').forEach(function(item){
+              document.querySelectorAll('.data input[type=text]').forEach((item) =>{
                   item.disabled = true;
               });
               startMoney.style.display = 'none';
@@ -81,7 +81,7 @@ let isNumber = function(n){
             periodSelect.value = 1;
   
             const allInputs = document.querySelectorAll('input[type=text]');
-            allInputs.forEach(function(item) {
+            allInputs.forEach((item) => {
                 item.value = '';
                 item.disabled = false;
             });
@@ -241,4 +241,4 @@ let isNumber = function(n){
       }
 
       const appData = new AppData();
-      AppData.prototype.eventListener();
+      appData.eventListener();
