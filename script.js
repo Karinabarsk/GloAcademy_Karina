@@ -228,11 +228,12 @@ let isNumber = function(n){
   }
 
   userheck(){
-    if (depositPercent !== isNumber || depositPercent <= 0 && depositPercent >= 100){
+    if (depositPercent.value <= 0 || depositPercent.value >= 100 || salaryAmount.value === '') {
       alert("Введите корректное значение в поле проценты");
-      this.startMoney.style.display = 'none';
-      return;
-    } 
+      startMoney.disabled = true;
+    } else {
+      startMoney.disabled = false;
+    }
   }
  
 
@@ -263,8 +264,16 @@ let isNumber = function(n){
   });
     cancel.addEventListener('click', this.reset.bind(this));
     depositCheck.addEventListener('change',this.depositHandler.bind(this));
-    startMoney.addEventListener('click', this.userheck.bind(this));
-    
+    depositPercent.addEventListener('change', this.userheck);
+
+    depositPercent.addEventListener('input', function(){
+    depositPercent.value = depositPercent.value.replace(/[^0-9]/, '');
+    });
+
+    depositAmount.addEventListener('input', function(){
+      depositAmount.value = depositAmount.value.replace(/[^0-9]/, '');
+      });
+
     const addExp = [];
     for (let i = 0; i<this.addExpenses.length; i++){
       let element = this.addExpenses[i].trim();
