@@ -46,7 +46,7 @@ function countTimer(deadline){
        updateClock();
 }
 
-countTimer('23 february 2020');
+countTimer('28 february 2020');
 //setInterval(countTimer, 1000, '30 february 2020');
 
 // menu
@@ -58,25 +58,11 @@ const toggleMenu = () => {
            closeBtn = document.querySelector('.close-btn'),
            menuItems = menu.querySelectorAll('ul>li');
 
-          let count = 0;
-
-          const slideMenu = () => {
-              count++;
-              menu.style.left = count*4 + 'px';
-              if(count<230) {
-                  setTimeout(slideMenu, 10);
-              }
-              if(screen.width > 768) {
-                  btnMenu.style = 'none';
-              }
-          };
-
           const handlerMenu = () => {
            menu.classList.toggle('active-menu');
-           };
-                
+           };     
 
-        btnMenu.addEventListener('click', handlerMenu, slideMenu());
+        btnMenu.addEventListener('click', handlerMenu);
         closeBtn.addEventListener('click', handlerMenu); 
         menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
 };
@@ -85,19 +71,37 @@ toggleMenu();
 const togglePopup = () => {
     const popup = document.querySelector('.popup'),
         popupBtn = document.querySelectorAll('.popup-btn'),
-        popupClose = document.querySelector('.popup-close');
+        popupClose = document.querySelector('.popup-close'),
+        popupContent = document.querySelector('.popup-content');
+
+
+        let count = 0;
+        const slideMenu = () => {
+            count++;
+            popupContent.style.left = count*4 + 'px';
+            if(count<200) {
+                setTimeout(slideMenu, 10);
+            }};
 
         popupBtn.forEach((elem) => {
             elem.addEventListener('click', () => {
                 popup.style.display = 'block';
+                slideMenu();
             });
         });
 
         popupClose.addEventListener('click', () => {
             popup.style.display = 'none';
         });
+
+
+           if(screen.width < 768) {
+                popup.style = 'none';
+            }
+      
 };
 
 togglePopup();
+
 
 });
