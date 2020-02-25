@@ -69,37 +69,46 @@ const toggleMenu = () => {
 toggleMenu();
 
 const togglePopup = () => {
-    const popup = document.querySelector('.popup'),
-        popupBtn = document.querySelectorAll('.popup-btn'),
-        popupClose = document.querySelector('.popup-close'),
-        popupContent = document.querySelector('.popup-content');
 
+    const popup = document.querySelector('.popup');
+    const popupBtn = document.querySelectorAll('.popup-btn');
 
-        let count = 0;
-        const slideMenu = () => {
-            count++;
-            popupContent.style.left = count*4 + 'px';
-            if(count<200) {
-                setTimeout(slideMenu, 10);
-            }};
+    popupBtn.forEach((elem) => {
+       elem.addEventListener('click', () => {
 
-        popupBtn.forEach((elem) => {
-            elem.addEventListener('click', () => {
-                popup.style.display = 'block';
-                slideMenu();
-            });
-        });
+          const popupContent = document.querySelector('.popup-content');
 
-        popupClose.addEventListener('click', () => {
-            popup.style.display = 'none';
-        });
+          if (window.innerWidth > 768) {
+             popup.style.display = 'block';
+             popupContent.style.top = '0%';
+             let activePopup = setInterval(() => {
+                if (popupContent.style.top = '20%') {
+                   clearInterval(activePopup);
+                }
+                popupContent.style.transition = "all 1s";
+                popupContent.style.top = '20%';
+             }, 20);
+          } else {
+             popup.style.display = 'block';
+          }
+       });
+    });
 
+    popup.addEventListener('click', (event) => {
+       let target = event.target;
 
-           if(screen.width < 768) {
-                popup.style = 'none';
-            }
-      
-};
+       if (target.classList.contains('popup-close')) {
+          popup.style.display = 'none';
+       } else {
+          target = target.closest('.popup-content');
+          if (!target) {
+             popup.style.display = 'none';
+          }
+       }
+
+    });
+ };
+
 
 togglePopup();
 
