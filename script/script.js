@@ -333,68 +333,82 @@ const commandPhoto = document.querySelectorAll('.command__photo');
   };
   calc(100);
 
-  const sendForm = () => {
-    const errorMessage = 'Что то пошло не так...';
-    const loadMessage = document.createElement('div');
-    const successMessage = 'Спасибо! Мы с Вами свяжемся.';
-    const form = document.getElementById('form1');
-    const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = 'font-size: 2rem;';
-
-    
-  form.forEach((item) => {
-     
-      item.addEventListener('input', (event) => {
-        let target = event.target;
-        if(target.placeholder === 'Ваше имя' || target.placeholder === 'Ваше сообщение') {
-          if(target.value.replace(/^[а-яА-ЯёЁ\s]+/g, '')) {
-            target.value = target.value.substring(0, target.value.length - 1);
-          } else if(target.value.trim() === '') target.value = '';
-          else return;
-        } else if(target.placeholder === 'Номер телефона') { 
-            if(target.value.length === 13  || target.value.slice(1).replace(/[\d]+/g, '')) {
-              target.value = target.value.substring(0, target.value.length - 1);
-            } else return;
-          }
-      });
-    
+  const postData = (body) => {
+    return fetch('./server.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
     });
+};
 
+const sendForm = () => {
+  const loadMessage = 'Загрузка...';
+  let bodyTag = document.querySelector('body');
+  let allInputs = document.querySelectorAll('input');
+  const statusMessage = document.createElement('div');
+  statusMessage.style.cssText = 'font-size: 2rem';
 
-    form.addEventListener('submit', (event) => {
+  bodyTag.addEventListener('submit', (event) => {
       event.preventDefault();
-      form.appendChild(loadMessage);
-      form.appendChild(statusMessage);
-      loadMessage.textContent = loadMessage.classList.add('spinning-square');
-      const formData = new FormData(form);
+      let target = event.target;
+      let successMessage = () => {
+          statusMessage.textContent = 'Данные успешно отправлены!';
+
+          let img = document.createElement('IMG');
+          img.src = './images/recall.jpg';
+          img.style.height = '200px';
+          target.appendChild(img);
+
+          allInputs.forEach((item) => {
+              item.value = '';
+          });
+      };
+
+      const formData = new FormData(target);
       let body = {};
       formData.forEach((val, key) => {
-        body[key] = val;
+          body[key] = val;
       });
-      postData(body);
-    });
 
-    
-    const postData = () => {
-      fetch('server.php')
+      let errorMessage = () => {
+          statusMessage.textContent = 'Что-то пошло не так...';
+          console.error("Что-то пошло ...");
+      };
+
+      if (target.matches('form')) {
+          statusMessage.textContent = loadMessage;
+          statusMessage.style.color = 'white';
+          target.appendChild(statusMessage);
+      }
+
+      postData(body)
           .then((response) => {
-            if (response.status !== 200){
-              statusMessage.textContent = errorMessage;
-              form.removeChild(loadMessage);
-              throw new Error('status network not 200.');
-            }
-            return(response.text());
+              if (response.status !== 200) {
+                  throw new Error('Network status is not 200');
+              }
+              successMessage();
           })
-          .then((data) => {
-            statusMessage.textContent = successMessage;
-            form.removeChild(loadMessage);
-            form.reset();
-          })
-          .catch((error) => console.log(error));
-    };
-  
-  sendForm(); 
+          .catch(errorMessage);
 
+  });
 };
+sendForm(); 
+
+// Валидация форм
+let bodyTag = document.querySelector('body');
+bodyTag.addEventListener('input', (event) => {
+    event.preventDefault();
+    let target = event.target;
+    if (target.matches('input[name="user_phone"]')) {
+        target.value = target.value.replace(/[^\+\d]/g, '');
+    } else if (target.matches('input[name="user_name"]') || target.matches('input[name="user_message"]')) {
+        target.value = target.value.replace(/[^а-яА-Яa-zA-Z,.!?"';: ]/, '');
+    } else if (target.matches('input[name="user_email"]')) {
+        target.value = target.value.replace(/[а-яА-Я]/gi, '');
+    }
+  });
+
 
 });
