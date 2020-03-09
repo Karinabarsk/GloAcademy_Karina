@@ -10,13 +10,17 @@ const togglePopup = () => {
           if (window.innerWidth > 768) {
              popup.style.display = 'block';
              popupContent.style.top = '0%';
-             let activePopup = setInterval(() => {
-                if (popupContent.style.top = '20%') {
-                   clearInterval(activePopup);
-                }
-                popupContent.style.transition = "all 1s";
-                popupContent.style.top = '20%';
-             }, 20);
+             let count = 0;
+             let endPosition = 20;
+             let speed = 1;
+             const activePopup = () => {
+               popupContent.style.top = count + '%';
+               count = count + speed;
+               if(count < endPosition){
+                  requestAnimationFrame(activePopup);
+               }
+             };
+             requestAnimationFrame(activePopup);
           } else {
              popup.style.display = 'block';
           }
