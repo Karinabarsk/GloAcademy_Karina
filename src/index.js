@@ -1,5 +1,6 @@
 'use strict';
 
+//Перезвоните мне
 const popup = () => {
 
     const btn = document.querySelector('.call-btn');
@@ -54,6 +55,7 @@ popup();
         });
     };
 
+//Отправка форм
 const sendForm = () => {
     const loadMessage = 'Загрузка...';
     let bodyTag = document.querySelector('body');
@@ -68,7 +70,7 @@ const sendForm = () => {
             statusMessage.textContent = 'Данные успешно отправлены!';
   
             let img = document.createElement('IMG');
-            img.src = './images/recall.jpg';
+            img.src = './img/favicon/favicon-16x16.png';
             img.style.height = '200px';
             target.appendChild(img);
   
@@ -108,6 +110,45 @@ const sendForm = () => {
 
   sendForm();
   
+//Аккордион
+
+const panelAcordion = () => {
+
+ let acc = document.querySelectorAll('.panel-heading');
+ let panel = document.querySelectorAll('.panel-collapse');
+
+ panel[0].classList.add('show');
+ panel[0].classList.add('in');
+
+for(let i = 0; i < acc.length; i++){
+  acc[i].onclick = function () {
+    for(let x = 0; x < panel.length; x++){
+      panel[x].classList.remove('show');
+      panel[x].classList.remove('in');
+    }
+    this.nextElementSibling.classList.toggle('show');
+    this.nextElementSibling.classList.toggle('in');
+  };
+
+}
+
+};
+
+panelAcordion();
+
+//Кнопка следующий шаг
+
+/*const nextAcordion = () => {
+
+  let nextBtn = document.querySelectorAll('.construct-btn');
+  let panel = document.querySelectorAll('.panel-collapse');
+
+  nextBtn[0].addEventListener('click', () => {
+    for(let i = 0; i < acc.length; i++){
 
 
+    }
+  });
+};
 
+nextAcordion();*/
