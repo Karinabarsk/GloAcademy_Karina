@@ -3,28 +3,33 @@
 //Перезвоните мне
 const popup = () => {
 
-    const btn = document.querySelector('.call-btn');
-    const popup = document.querySelector('.popup');
+    const btn = document.querySelectorAll('.call-btn');
 
-    btn.addEventListener('click', () => {
+    for (let buttonIm of btn) {
+      buttonIm.addEventListener('click', (event) => {
         const popupCall = document.querySelector('.popup-call');
         popupCall.style.display = 'block';
+        
+   /* btn.addEventListener('click', () => {
+        const popupCall = document.querySelector('.popup-call');
+        popupCall.style.display = 'block';*/
 
-    popup.addEventListener('click', (event) => {
+    popupCall.addEventListener('click', (event) => {
             let target = event.target;
      
             if (target.classList.contains('popup-close')) {
-               popup.style.display = 'none';
+               popupCall.style.display = 'none';
             } else {
                target = target.closest('.popup-content');
                if (!target) {
-                  popup.style.display = 'none';
+                  popupCall.style.display = 'none';
                }
             }
      
          });
 });
 
+}
 };
 
 popup();
@@ -69,10 +74,9 @@ const sendForm = () => {
         let successMessage = () => {
             statusMessage.textContent = 'Данные успешно отправлены!';
   
-            let img = document.createElement('IMG');
-            img.src = './img/favicon/favicon-16x16.png';
-            img.style.height = '200px';
-            target.appendChild(img);
+        /*    let stri = document.createElement('string');
+            stri = 'Всё хорошо';
+            target.appendChild(stri);*/
   
             allInputs.forEach((item) => {
                 item.value = '';
@@ -138,92 +142,85 @@ panelAcordion();
 
 //Кнопка следующий шаг
 
-const nextAcordion = () => {
+const accordions = () => {
 
-  let nextBtn = document.querySelectorAll('.construct-btn');
-  let panel = document.querySelectorAll('.panel-collapse');
+const firstAcc = document.querySelector('#accordion'),
+      secondAcc = document.querySelector('#accordion-two'),
+      allHeadingPanel = document.querySelectorAll('a[role="button"]'),
+      allCollapsePanel = document.querySelectorAll('.panel-collapse'),
+      collapsePanelBtn = document.querySelectorAll('.construct-btn');
 
-  for(let i = 0; i < nextBtn.length; i++){
-    nextBtn[i].onclick = function () {
-      for(let x = 0; x < panel.length; x++){
-        if (panel[x].style.display == 'none' ){
-          panel[x].style.display = 'block';
-        }   else {
-          panel[x].style.display = 'none';
-        }
+const toggleAcc = index => {
+
+    for (let i = 0; i < allCollapsePanel.length; i++) {
+      if (index === i) {
+        allCollapsePanel[i].classList.toggle('in');
+      } else {
+        allCollapsePanel[i].classList.remove('in');
       }
-      };
-     return false;
-} 
+    }
+  };
 
-};
-nextAcordion();
+  const toggleBtn = index => {
 
+    for (let i = 0; i < allCollapsePanel.length; i++) {
+      if (index === i) {
+        i++;
+        allCollapsePanel[i].classList.add('in');
+      }
+    };
+  };
 
-// Удаление блока
+  firstAcc.addEventListener('click', event => {
 
-const oneCase = () => {
+    let target = event.target;
 
-  
-  const switchTypeInput = document.querySelector('.onoffswitch-checkbox')[0];
-  const select = document.querySelector('.select-box')[2];
+    target = target.closest('a[role="button"]')
 
-  let data = {
-    type: true, //true - однокамерный, false - двухкамерный
-};
+    if (target) {
 
-  select.style.display = 'none';
-
-  switchTypeInput.addEventListener('input', event => {
-    if (switchTypeInput.checked) { //однокамерный
-
-        data.type = true;
-        select.style.display = 'none';
-
-    } else { //двухкамерный
-        data.type = false;
-        secondWell.style.display = 'block';
+      allHeadingPanel.forEach((item, i) => {
+        if (item === target) {
+          toggleAcc(i);
+        }
+      });
     }
 
+    target = event.target;
+    while (target !== firstAcc) {
+      if (target.classList.contains('construct-btn')) {
+        
+        collapsePanelBtn.forEach((item, i) => {
+          if (item === target) {
+            toggleBtn(i);
+          }
+        });
+      };
+
+      target = target.parentNode;
+    };
   });
 
+  secondAcc.addEventListener('click', event => {
 
+    let target = event.target;
 
-  /* const inputCheckbox = document.getElementById('myonoffswitch');
-   const onoffswitchLabel = document.querySelector('.onoffswitch-label');
-    
-    const hiddenElementIdList = [
-        'title-well-two',
-        'select-one-well-two',
-        'select-two-well-two'
-    ];
-    
-    const hiddenClass = 'hidden';
-    
-    const listenerCheckbox = (event) => {
-        
-        hiddenElementIdList.forEach( (elementId) => {
-            
-            const element = document.getElementById(elementId);
-            
-            if(inputCheckbox.checked){
-                element.classList.remove(hiddenClass);
-            }
-            else{
-                element.classList.add(hiddenClass);
-            }
-            
-        });
-        
-    };
-    
-    inputCheckbox.checked = true;
-    
-    onoffswitchLabel.addEventListener('click', listenerCheckbox());*/
+    if (target.closest('a[role="button"]')) {
+
+      allHeadingPanel.forEach((item, i) => {
+        if (item === target) {
+          toggleAccord(i);
+        }
+      });
+    }
+  });
 
 };
 
-oneCase();
+accordions();
+
+// Удаление блока, Калькулятор
+
 
 // Кнопка больше
 
