@@ -138,17 +138,49 @@ panelAcordion();
 
 //Кнопка следующий шаг
 
-/*const nextAcordion = () => {
+const nextAcordion = () => {
 
   let nextBtn = document.querySelectorAll('.construct-btn');
   let panel = document.querySelectorAll('.panel-collapse');
 
-  nextBtn[0].addEventListener('click', () => {
-    for(let i = 0; i < acc.length; i++){
+  for(let i = 0; i < nextBtn.length; i++){
+    nextBtn[i].onclick = function () {
+      for(let x = 0; x < panel.length; x++){
+        if (panel[x].style.display == 'none' ){
+          panel[x].style.display = 'block';
+        }   else {
+          panel[x].style.display = 'none';
+        }
+      }
+      };
+     return false;
+} 
+
+};
+nextAcordion();
 
 
-    }
-  });
+//
+
+const oneCase = () => {
+
+  let panel = document.getElementsByClassName('panel-body');
+  let select = document.getElementsByClassName('select-box');
+  let one = document.querySelector('.onoffswitch-label');
+
+let foo = function() {
+ 
+  if (one.style.display == 'block'){
+    panel.removeChild(select[2]);
+    panel.removeChild(select[3]);
+  } else {
+    select.disabled = false;
+  };
+ 
+}
+foo();
+
 };
 
-nextAcordion();*/
+oneCase();
+
