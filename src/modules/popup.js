@@ -1,27 +1,26 @@
 const popup = () => {
     
-/*const callBtn = document.getElementsByClassName ('call-btn');
+   const btn = document.querySelector('.call-btn');
+   const popup = document.querySelector('.popup');
 
-    document.addEventListener ('click', (event) => {
-        let target = event.target;
-        if (target = target.closest('.popup')) {
-         callBtn.classList.add('popup-call');
-      } else {
-            target = event.target;
-            if (callBtn.classList.contains('popup-call')) {
-               if (target !== target.closest('.popup-call')) {
-                  callBtn.classList.remove('popup-call');
-               } else {
-                  if (target !== target.closest('.popup-call')) {
-                     callBtn.classList.remove('popup-call');
-                  }
-               }
-            }
-            return;
-         }
-      });*/
+   btn.addEventListener('click', () => {
+       const popupCall = document.querySelector('.popup-call');
+       popupCall.style.display = 'block';
 
-      alert('Hello');
+   popup.addEventListener('click', (event) => {
+           let target = event.target;
+    
+           if (target.classList.contains('popup-close')) {
+              popup.style.display = 'none';
+           } else {
+              target = target.closest('.popup-content');
+              if (!target) {
+                 popup.style.display = 'none';
+              }
+           }
+    
+        });
+});
 
 };
 

@@ -160,27 +160,191 @@ const nextAcordion = () => {
 nextAcordion();
 
 
-//
+// Удаление блока
 
 const oneCase = () => {
 
-  let panel = document.getElementsByClassName('panel-body');
-  let select = document.getElementsByClassName('select-box');
-  let one = document.querySelector('.onoffswitch-label');
+  
+  const switchTypeInput = document.querySelector('.onoffswitch-checkbox')[0];
+  const select = document.querySelector('.select-box')[2];
 
-let foo = function() {
- 
-  if (one.style.display == 'block'){
-    panel.removeChild(select[2]);
-    panel.removeChild(select[3]);
-  } else {
-    select.disabled = false;
-  };
- 
-}
-foo();
+  let data = {
+    type: true, //true - однокамерный, false - двухкамерный
+};
+
+  select.style.display = 'none';
+
+  switchTypeInput.addEventListener('input', event => {
+    if (switchTypeInput.checked) { //однокамерный
+
+        data.type = true;
+        select.style.display = 'none';
+
+    } else { //двухкамерный
+        data.type = false;
+        secondWell.style.display = 'block';
+    }
+
+  });
+
+
+
+  /* const inputCheckbox = document.getElementById('myonoffswitch');
+   const onoffswitchLabel = document.querySelector('.onoffswitch-label');
+    
+    const hiddenElementIdList = [
+        'title-well-two',
+        'select-one-well-two',
+        'select-two-well-two'
+    ];
+    
+    const hiddenClass = 'hidden';
+    
+    const listenerCheckbox = (event) => {
+        
+        hiddenElementIdList.forEach( (elementId) => {
+            
+            const element = document.getElementById(elementId);
+            
+            if(inputCheckbox.checked){
+                element.classList.remove(hiddenClass);
+            }
+            else{
+                element.classList.add(hiddenClass);
+            }
+            
+        });
+        
+    };
+    
+    inputCheckbox.checked = true;
+    
+    onoffswitchLabel.addEventListener('click', listenerCheckbox());*/
 
 };
 
 oneCase();
 
+// Кнопка больше
+
+const btnMore = () => {
+    
+  const addSentenceBtn = document.querySelector('.add-sentence-btn');
+  const parent = addSentenceBtn.parentElement;
+  
+  const removeClasses = ['hidden', 'visible-sm-block'];
+  
+  addSentenceBtn.addEventListener('click', () => {
+  
+      addSentenceBtn.style.display = 'none';
+      
+      removeClasses.forEach( (removeClass) => {
+          
+          const elementList = parent.querySelectorAll('.' + removeClass);
+          
+          elementList.forEach( (element) => {
+              element.classList.remove(removeClass);
+          });
+          
+      });
+      
+  });
+  
+};
+
+btnMore ();
+
+// Узнать цену и скидку
+
+const discount = () => {
+
+  const btnDisc = document.querySelectorAll('.sentence-btn');
+
+
+
+  for (let buttonItem of btnDisc) {
+    buttonItem.addEventListener('click', (event) => {
+      const popupD = document.querySelector('.popup-discount');
+      popupD.style.display = 'block';
+
+      popupD.addEventListener('click', (event) => {
+        let target = event.target;
+ 
+        if (target.classList.contains('popup-close')) {
+           popupD.style.display = 'none';
+        } else {
+           target = target.closest('.popup-content');
+           if (!target) {
+              popupD.style.display = 'none';
+           }
+        }
+
+
+    });
+  })
+};
+};
+
+discount();
+
+// Получить чек-лист и скидку
+
+const checkList = () => {
+
+  const btnSale = document.querySelector('.gauging-button');
+
+  btnSale.addEventListener('click', () => {
+      const popupCheck = document.querySelector('.popup-check');
+      popupCheck.style.display = 'block';
+
+  popupCheck.addEventListener('click', (event) => {
+          let target = event.target;
+   
+          if (target.classList.contains('popup-close')) {
+             popupCheck.style.display = 'none';
+          } else {
+             target = target.closest('.popup-content');
+             if (!target) {
+                popupCheck.style.display = 'none';
+             }
+          }
+   
+       });
+});
+
+};
+
+
+checkList();
+
+
+// Консультация
+
+const consultation = () => {
+
+  const btnCons = document.querySelector('.consultation-btn');
+
+  btnCons.addEventListener('click', () => {
+    const popCons = document.querySelector('.popup-consultation')
+
+    popCons.style.display = 'block';
+
+    popCons.addEventListener('click', (event) => {
+      let target = event.target;
+
+      if (target.classList.contains('popup-close')) {
+         popCons.style.display = 'none';
+      } else {
+         target = target.closest('.popup-content');
+         if (!target) {
+            popCons.style.display = 'none';
+         }
+      }
+
+   });
+
+  });
+
+};
+
+consultation();
