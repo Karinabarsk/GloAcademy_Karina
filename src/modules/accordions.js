@@ -1,76 +1,78 @@
 const accordions = () => {
 
-    const firstAcc = document.querySelector('#accordion'),
-          secondAcc = document.querySelector('#accordion-two'),
-          allHeadingPanel = document.querySelectorAll('a[role="button"]'),
-          allCollapsePanel = document.querySelectorAll('.panel-collapse'),
-          collapsePanelBtn = document.querySelectorAll('.construct-btn');
-    
-    const toggleAcc = index => {
-    
-        for (let i = 0; i < allCollapsePanel.length; i++) {
-          if (index === i) {
-            allCollapsePanel[i].classList.toggle('in');
-          } else {
-            allCollapsePanel[i].classList.remove('in');
-          }
-        }
-      };
-    
-      const toggleBtn = index => {
-    
-        for (let i = 0; i < allCollapsePanel.length; i++) {
-          if (index === i) {
-            i++;
-            allCollapsePanel[i].classList.add('in');
-          }
-        };
-      };
-    
-      firstAcc.addEventListener('click', event => {
-    
-        let target = event.target;
-    
-        target = target.closest('a[role="button"]')
-    
-        if (target) {
-    
-          allHeadingPanel.forEach((item, i) => {
-            if (item === target) {
-              toggleAcc(i);
-            }
-          });
-        }
-    
-        target = event.target;
-        while (target !== firstAcc) {
-          if (target.classList.contains('construct-btn')) {
-            
-            collapsePanelBtn.forEach((item, i) => {
-              if (item === target) {
-                toggleBtn(i);
+  const accordion = document.getElementById('accordion');
+  const accordionTwo = document.getElementById('accordion-two');
+  
+  const accordionList = [accordion, accordionTwo];
+  
+  accordionList.forEach((accordion) => {
+      
+      const panelHeadingSelector = '.panel-heading';
+      const panelCollapseSelector = '.panel-collapse';
+      const panelDefaultSelector = '.panel-default';
+      const nextBtnSelector = 'a.construct-btn';
+      
+      const addedClass = 'in';
+      
+      const panelHeadingList = accordion.querySelectorAll(panelHeadingSelector);
+      const panelCollapseList = accordion.querySelectorAll(panelCollapseSelector);
+      const nextBtnList = accordion.querySelectorAll(nextBtnSelector);
+      
+      const listenerPanelAccordion = (event) => {
+          
+          event.preventDefault();
+          
+          const panelDefault = event.currentTarget.closest(panelDefaultSelector);
+          const currentPanelCollapse = panelDefault.querySelector(panelCollapseSelector);
+          
+          panelCollapseList.forEach( (panelCollapse) => {
+              
+              if(panelCollapse !== currentPanelCollapse && 
+                  panelCollapse.classList.contains(addedClass)){
+                      
+                  panelCollapse.classList.remove(addedClass);
+                  
               }
-            });
-          };
-    
-          target = target.parentNode;
-        };
-      });
-    
-      secondAcc.addEventListener('click', event => {
-    
-        let target = event.target;
-    
-        if (target.closest('a[role="button"]')) {
-    
-          allHeadingPanel.forEach((item, i) => {
-            if (item === target) {
-              toggleAccord(i);
-            }
+              
           });
-        }
-      });
+          
+          currentPanelCollapse.classList.toggle(addedClass);
+          
+      };
+      
+      const listenerNextBtnAccordion = (event) => {
     
-    };
+    event.preventDefault();
+      
+          let nextPanelCollapseFound = false;
+          
+          panelCollapseList.forEach( (panelCollapse) => {
+              
+              if(nextPanelCollapseFound){
+                  panelCollapse.classList.add(addedClass);
+                  nextPanelCollapseFound = false;
+              }
+              else if(panelCollapse.classList.contains(addedClass)){
+                  panelCollapse.classList.remove(addedClass);
+                  nextPanelCollapseFound = true;
+              }
+              
+          });
+          
+      };
+      
+      panelHeadingList.forEach((panelHeading) => {
+          panelHeading.addEventListener('click', listenerPanelAccordion);
+      });
+      
+      nextBtnList.forEach((nextBtn) => {
+          nextBtn.addEventListener('click', listenerNextBtnAccordion);
+      });
+      
+      
+  });
+  
+  
+};
 
 export default accordions;    

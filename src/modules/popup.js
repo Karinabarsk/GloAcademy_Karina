@@ -6,10 +6,10 @@ const popup = () => {
      buttonIm.addEventListener('click', (event) => {
        const popupCall = document.querySelector('.popup-call');
        popupCall.style.display = 'block';
-
+       event.preventDefault();
    popupCall.addEventListener('click', (event) => {
            let target = event.target;
-    
+           
            if (target.classList.contains('popup-close')) {
               popupCall.style.display = 'none';
            } else {
