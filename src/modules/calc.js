@@ -75,7 +75,7 @@ const calc = () => {
     
     const listenerRunСalculate = (event) => {
         
-        calculateCost();
+        calc();
         
     };
     
@@ -83,12 +83,12 @@ const calc = () => {
         
         const element = document.getElementById(elementId);
         
-        element.addEventListener('input', calculateCost);
+        element.addEventListener('input', calc);
         
     });
   
-  calculateBtn.addEventListener('click', calculateCost);
+  calculateBtn.addEventListener('click', calc);
     
   };
 
-  export default calc;
+  export default addListenerForСalculateCost;
