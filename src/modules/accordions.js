@@ -1,78 +1,33 @@
-const accordions = () => {
+const accordeonConstructor = () => {
 
-  const accordion = document.getElementById('accordion');
-  const accordionTwo = document.getElementById('accordion-two');
-  
-  const accordionList = [accordion, accordionTwo];
-  
-  accordionList.forEach((accordion) => {
-      
-      const panelHeadingSelector = '.panel-heading';
-      const panelCollapseSelector = '.panel-collapse';
-      const panelDefaultSelector = '.panel-default';
-      const nextBtnSelector = 'a.construct-btn';
-      
-      const addedClass = 'in';
-      
-      const panelHeadingList = accordion.querySelectorAll(panelHeadingSelector);
-      const panelCollapseList = accordion.querySelectorAll(panelCollapseSelector);
-      const nextBtnList = accordion.querySelectorAll(nextBtnSelector);
-      
-      const listenerPanelAccordion = (event) => {
-          
-          event.preventDefault();
-          
-          const panelDefault = event.currentTarget.closest(panelDefaultSelector);
-          const currentPanelCollapse = panelDefault.querySelector(panelCollapseSelector);
-          
-          panelCollapseList.forEach( (panelCollapse) => {
-              
-              if(panelCollapse !== currentPanelCollapse && 
-                  panelCollapse.classList.contains(addedClass)){
-                      
-                  panelCollapse.classList.remove(addedClass);
-                  
-              }
-              
-          });
-          
-          currentPanelCollapse.classList.toggle(addedClass);
-          
-      };
-      
-      const listenerNextBtnAccordion = (event) => {
-    
-    event.preventDefault();
-      
-          let nextPanelCollapseFound = false;
-          
-          panelCollapseList.forEach( (panelCollapse) => {
-              
-              if(nextPanelCollapseFound){
-                  panelCollapse.classList.add(addedClass);
-                  nextPanelCollapseFound = false;
-              }
-              else if(panelCollapse.classList.contains(addedClass)){
-                  panelCollapse.classList.remove(addedClass);
-                  nextPanelCollapseFound = true;
-              }
-              
-          });
-          
-      };
-      
-      panelHeadingList.forEach((panelHeading) => {
-          panelHeading.addEventListener('click', listenerPanelAccordion);
+  const constructorSection = document.querySelector('.constructor');
+  const captions = constructorSection.querySelectorAll('.panel-heading');
+  const constents = constructorSection.querySelectorAll('.panel-collapse');
+  const buttons = constructorSection.querySelectorAll('.construct-btn');
+
+  captions.forEach((caption, captionIndex) => {
+    constents.forEach((content, contentIndex) => {
+      caption.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (captionIndex === contentIndex) {
+          content.style.display = 'block';
+        } else {
+          content.style.display = 'none';
+        }
       });
-      
-      nextBtnList.forEach((nextBtn) => {
-          nextBtn.addEventListener('click', listenerNextBtnAccordion);
-      });
-      
-      
+    })
   });
-  
-  
+
+  buttons.forEach((button, index) => {
+    if (index !== buttons.length - 1) {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        button.parentNode.parentNode.style.display = 'none';
+        button.parentNode.parentNode.parentNode.nextElementSibling.childNodes[3].style.display = 'block';
+      });
+    }
+  });
+
 };
 
-export default accordions;    
+export default accordeonConstructor;

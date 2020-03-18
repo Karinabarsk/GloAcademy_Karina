@@ -11,7 +11,6 @@ import 'es6-promise'; // Полифил Promise
 import popup from './modules/popup';
 import sendForm from './modules/sendForm';
 import panelAcordion from './modules/panelAcordion';
-import accordions from './modules/accordions';
 import createBlock from './modules/createBlock';
 import addListenerForСalculateCost from './modules/calc';
 import btnMore from './modules/btnMore';
@@ -19,6 +18,7 @@ import discount from './modules/discount';
 import checkList from './modules/checkList';
 import consultation from './modules/consultation';
 import addElementToObj from './modules/addElementToObj';
+import accordeonConstructor from "./modules/accordions";
 
 
 //Перезвоните мне
@@ -35,7 +35,7 @@ panelAcordion();
 
 //Кнопка следующий шаг
 
-accordions();
+accordeonConstructor();
 
 // Удаление блока
 
