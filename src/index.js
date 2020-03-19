@@ -18,7 +18,7 @@ import discount from './modules/discount';
 import checkList from './modules/checkList';
 import consultation from './modules/consultation';
 import addElementToObj from './modules/addElementToObj';
-import accordeonConstructor from "./modules/accordions";
+import accordeonConstructor from './modules/accordions';
 
 
 //Перезвоните мне

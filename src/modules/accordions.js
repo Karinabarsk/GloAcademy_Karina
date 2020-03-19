@@ -1,6 +1,6 @@
 const accordeonConstructor = () => {
 
-  const constructorSection = document.querySelector('.constructor');
+ const constructorSection = document.querySelector('.constructor');
   const captions = constructorSection.querySelectorAll('.panel-heading');
   const constents = constructorSection.querySelectorAll('.panel-collapse');
   const buttons = constructorSection.querySelectorAll('.construct-btn');
@@ -15,7 +15,7 @@ const accordeonConstructor = () => {
           content.style.display = 'none';
         }
       });
-    })
+    });
   });
 
   buttons.forEach((button, index) => {
